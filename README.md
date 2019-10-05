@@ -1,2 +1,2 @@
-# Roll-the-Dice
-A simple dice rolling game.
+# Roll-the-Die
+A simple die rolling game.
