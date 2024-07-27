@@ -2,6 +2,8 @@ import time
 import random
 import raylib as rl
 
+#  TODO
+#  Find a solution to that circle
 
 def main():
     # Window title and dimensions
@@ -15,15 +17,14 @@ def main():
 
     roll = 0  # Dice roll result
     turn = 0  # Number of times rolled
-    prompt_text = "Push 'r' for a random roll. Push 'n' to quit.".encode('utf-8')
-    # prompt_colour = rl.WHITE
+    prompt_text = "Push 'r' for a random roll.\n\nPush 'n' to quit.".encode('utf-8')
     
     while not rl.WindowShouldClose():
         rl.BeginDrawing()
         rl.ClearBackground(rl.BLACK)
 
         # Draw greeting and instructions
-        greeting = "Hello there! Let's roll a die to shake off boredom!".encode('utf-8')
+        greeting = "Hello there!\n\nLet's roll a die to shake off boredom!".encode('utf-8')
         rl.DrawText(greeting, 100, 100, 24, rl.GREEN) # type: ignore
         rl.DrawCircle(400, 300, 100, rl.WHITE)
         # rl.DrawText(str(roll), 400, 300, 16, rl.GREEN) # type: ignore
