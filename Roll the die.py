@@ -25,6 +25,7 @@ def main():
         # Draw greeting and instructions
         greeting = "Hello there!\n\nLet's roll a die to shake off boredom!".encode('utf-8')
         rl.DrawText(greeting, 100, 100, 24, rl.GREEN) # type: ignore
+        
         # Result is in the circle
         roll_text = str(roll)
         roll_text_encoded = roll_text.encode('utf-8')
@@ -32,9 +33,11 @@ def main():
         circle_x = 400
         circle_y = 300
         text_x = circle_x - text_width // 2
-        text_y = circle_y - 20  # Half the font size (assuming 40)
+        text_y = circle_y - 16  # Half the font size (assuming 32)
         rl.DrawCircle(circle_x, circle_y, 100, rl.WHITE)
         rl.DrawText(roll_text_encoded, text_x, text_y, 32, rl.BLACK) # type: ignore
+        
+        # Setting the prompt for directions
         rl.DrawText(prompt_text, 100, 500, 24, rl.GREEN) # type: ignore
 
         # Check for user input
