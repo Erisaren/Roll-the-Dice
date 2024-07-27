@@ -4,62 +4,55 @@ import raylib as rl
 
 
 def main():
-    # Some variables here.
-    roll = random.randint(1, 6)  # Dice rolls.
-    turn = 0  # Number of time rolled.
-
-    # Window title, dimensions.
+    # Window title and dimensions
     WindowTitle = "*Roll the Die*".encode('utf-8')
     ScreenWidth = 800
     ScreenHeight = 600
 
-    # Initialising the window and setting FPS.
+    # Initialising the window and setting FPS
     rl.InitWindow(ScreenWidth, ScreenHeight, WindowTitle) # type: ignore
     rl.SetTargetFPS(60)
 
+    roll = 0  # Dice roll result
+    turn = 0  # Number of times rolled
+    prompt_text = "Push 'r' for a random roll. Push 'n' to quit.".encode('utf-8')
+    # prompt_colour = rl.WHITE
+    
     while not rl.WindowShouldClose():
-        # Basic greeting and screen position.
-        greeting = "Hello there! We are going to roll a die in order to shake off boredom!\n".encode('utf-8')
-        greeting_x = ScreenWidth/8
-        greeting_y = ScreenHeight/6
-        
-        # Result screen will be a circle.
-        circle_x = int(round(ScreenWidth/2))
-        circle_y = int(round(ScreenWidth/2))
-        circle_radius = 100
-
-        # Button here.
-
         rl.BeginDrawing()
         rl.ClearBackground(rl.BLACK)
-        # Draw green greeting text with font = 16.
-        rl.DrawText(greeting, greeting_x, greeting_y, 16, rl.GREEN) # type: ignore
-        # Drawing the result screen.
-        rl.DrawCircle(circle_x, circle_y, circle_radius, rl.WHITE)
-        #  Function in action.
-        answer = str(input("Push \"r\" for a random roll."))
-        while turn < 9:
-            turn = turn + 1
-            if answer == "r" or answer == "y":
-                "Rolling the dices...\n")
 
-                time.sleep(3)
-                print("Your roll is ", roll, "!\n")
-                answer = str(input("Roll the die again?\nPush \"y\" for yes.\nPush \"n\" for no."))
-            elif answer == "n":
-                print("Understood!")
-                break
-            else:
-                redo = str(input("Roll the dice again?\nPush \"y\" for yes.\nPush \"n\" for yes."))
-                break
+        # Draw greeting and instructions
+        greeting = "Hello there! Let's roll a die to shake off boredom!".encode('utf-8')
+        rl.DrawText(greeting, 100, 100, 24, rl.GREEN) # type: ignore
+        rl.DrawCircle(400, 300, 100, rl.WHITE)
+        # rl.DrawText(str(roll), 400, 300, 16, rl.GREEN) # type: ignore
+        rl.DrawText(prompt_text, 100, 500, 24, rl.GREEN) # type: ignore
 
+        # Check for user input
+        if rl.IsKeyPressed(rl.KEY_R):
+            roll = str(random.randint(1, 6))
+            prompt_text = f"Your roll is {roll}!\n\n Push 'r' to roll again or 'n' to quit.".encode('utf-8')
+            turn += 1
+
+        elif rl.IsKeyPressed(rl.KEY_N):
+            prompt_text = "Thank you for your participation!".encode('utf-8')
+            rl.DrawText(prompt_text, 200, 575, 24, rl.RED) # type: ignore
+            rl.EndDrawing()
+            time.sleep(3)
+            break
+
+        # Check if turn limit is reached
         if turn == 9:
-            print("Die rolling can't be addictive but please, take a break.")
-
-        print("Thank you for your participation!")
+            prompt_text = "You have reached 9 turns already. Please take a break!".encode('utf-8')
+            rl.DrawText(prompt_text, 100, 400, 16, rl.GREEN) # type: ignore
+            rl.EndDrawing()
+            time.sleep(3)
+            break
 
         rl.EndDrawing()
 
-
-def shutoff():
     rl.CloseWindow()
+
+if __name__ == "__main__":
+    main()
