@@ -4,6 +4,7 @@ import raylib as rl
 
 #  TODO
 #  Find a solution to that circle
+#  Have the result in the circle
 
 def main():
     # Window title and dimensions
